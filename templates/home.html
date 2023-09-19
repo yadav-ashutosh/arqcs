@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Home Page</title>
+</head>
+<body>
+    <h1>Welcome, {{ user_data.username }}</h1>
+    <p>Wallet Balance: ${{ user_data.wallet }}</p>
+    <p>Coin Value: {{ user_data.coinvalue }}</p>
+    <p>Networks: {{ user_data.connections }}</p>
+
+    <!-- Add other user data fields as needed -->
+
+    <a href="/">Logout</a>
+
+    <h2>Send Transaction</h2>
+    <form action="/send_amount" method="POST">
+        <input type="hidden" id="sender_username" name="sender_username" value="{{ user_data.username }}">
+        <label for="recipient_username">Recipient Username:</label>
+        <input type="text" id="recipient_username" name="recipient_username" required><br>
+        <label for="transaction_amount">Transaction Amount:</label>
+        <input type="number" id="transaction_amount" name="transaction_amount" step="0.01" required><br>
+        <input type="submit" value="Send">
+    </form>
+</body>
+</html>
