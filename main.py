@@ -5,7 +5,7 @@ from create_table import connect_db
 import sqlite3
 import random
 from validate import validate_txn
-
+from consume import consume_update
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
@@ -90,6 +90,12 @@ async def send_amount(request: Request, sender_username: str = Form(...), transa
 
         return templates.TemplateResponse("txn_failed.html", {"request": request})
 
+@app.post("/get_data")
+def get_data():
+    #data = consume_update('ashutosh')
+    data = {"message": "Wallet balance"}
+    print(data)
+    return data
 
 if __name__ == "__main__":
     import uvicorn

@@ -1,5 +1,5 @@
 import sqlite3
-
+from publish import publish_channel
 def validate_txn(username, receiver_un , txn_amount):
     # Connect to the database
     conn = sqlite3.connect("arqdb.db")
@@ -33,20 +33,20 @@ def validate_txn(username, receiver_un , txn_amount):
     #cursor.execute("INSERT INTO transactions (sender, receiver, amount) VALUES (?, ?, ?)", (username, receiver_un, txn_amount))
     print("transactions updated")
 
-    cursor.execute("SELECT coinvalue FROM user WHERE username=?", (receiver_un,))
-    receiver_coinvalue = cursor.fetchone()[0]
+    cursor.execute("SELECT wallet,coinvalue FROM user WHERE username=?", (receiver_un,))
+    result = cursor.fetchone()
+    receiver_coinvalue = result[0]
+    receiver_wallet = result[1]
     # Calculate the addition to the receiver's wallet
     addition = (txn_amount / coin_value) * receiver_coinvalue
 
     # Update receiver's balance (add the calculated amount)
     cursor.execute("UPDATE user SET wallet=wallet+? WHERE username=?", (addition, receiver_un))
-    print("Updated recievers wallet by:")
+    
+    publish_channel(username=username,wallet_balance=wallet_balance, last_transaction="-"+str(txn_amount), n=3)
+    publish_channel(username=receiver_un,wallet_balance=receiver_wallet, last_transaction="+"+str(txn_amount),n=3)
+    
+    print("Updated and published recievers wallet by:")
     # Commit the changes
     conn.commit()
-    # except Exception as e:
-    #     print("Validation exception")
-    #     conn.rollback()
-    #     raise e
-    # finally:
-        # Close the database connection
     conn.close()
