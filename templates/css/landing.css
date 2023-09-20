@@ -1,0 +1,21 @@
+body {
+    padding-top: 125px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.action {
+    font-size: 22px;
+    margin-top: 35px;
+}
+
+.button {
+    width: 400px;
+    margin-bottom: 15px;
+}
+
+.button>* {
+    width: 100%;
+}

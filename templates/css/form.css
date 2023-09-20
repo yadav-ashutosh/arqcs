@@ -1,0 +1,28 @@
+body {
+    padding-top: 125px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heading {
+    margin-bottom: 25px;
+}
+
+form {
+    width: 325px;
+}
+
+#bottom {
+    margin-bottom: 40px;
+}
+
+.button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn {
+    width: 100%;
+}
