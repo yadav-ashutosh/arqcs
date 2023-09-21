@@ -7,6 +7,7 @@ import sqlite3
 import random
 from validate import validate_txn
 from consume import consume_update
+from get_updates import get_updates_of_user
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 app.mount("/css", StaticFiles(directory="templates/css"), name="css")
@@ -93,8 +94,9 @@ async def send_amount(request: Request, sender_username: str = Form(...), transa
 
 @app.post("/get_data")
 def get_data():
+    userdata  = get_updates_of_user("ashutosh")
     #data = consume_update('ashutosh')
-    data = {"message": "Wallet balance"}
+    data = {"message": userdata}
     print(data)
     return data
 
