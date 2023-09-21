@@ -39,10 +39,10 @@ def validate_txn(username, receiver_un , txn_amount):
     receiver_wallet = result[1]
     # Calculate the addition to the receiver's wallet
     addition = (txn_amount / coin_value) * receiver_coinvalue
-
+    print("added")
     # Update receiver's balance (add the calculated amount)
     cursor.execute("UPDATE user SET wallet=wallet+? WHERE username=?", (addition, receiver_un))
-    
+    print("Updated rc wallet")
     publish_channel(username=username,wallet_balance=wallet_balance, last_transaction="-"+str(txn_amount), n=3)
     publish_channel(username=receiver_un,wallet_balance=receiver_wallet, last_transaction="+"+str(txn_amount),n=3)
     

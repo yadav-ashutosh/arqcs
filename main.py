@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, Form, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from create_table import connect_db
 import sqlite3
 import random
@@ -8,7 +9,7 @@ from validate import validate_txn
 from consume import consume_update
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
-
+app.mount("/css", StaticFiles(directory="templates/css"), name="css")
 # Function to check if a user exists in the database
 def user_exists(username):
     conn = sqlite3.connect("arqdb.db")
