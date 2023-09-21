@@ -1,13 +1,21 @@
 body {
-    padding-top: 50px;
+    padding-block: 25px;
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
 }
 
 .heading {
     margin-bottom: 25px;
+}
+
+.left_container {
+    padding-top: 40px;
+    display: flex;
+    border-right: 1.25px solid rgb(226, 226, 226);
+    width: 55%;
+    flex-direction: column;
+    align-items: center;
 }
 
 .info {
@@ -37,6 +45,30 @@ form {
     justify-content: flex-end;
 }
 
-.btn {
+#send {
     width: 100%;
+}
+
+#getDataButton {
+    width: 200px;
+}
+
+.right_container {
+    flex-grow: 1;
+    padding: 40px 60px;
+}
+
+#search_label {
+    width: 200px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
 }
