@@ -52,7 +52,7 @@
                 if (response.ok) {
                     const data = await response.json();
                     console.log(data)
-                    dataDiv.innerText = data.message; // Update the div with received data
+                    dataDiv.innerText =JSON.stringify(data.message); // Update the div with received data
                 } else {
                     dataDiv.innerText = "Error fetching data";
                 }
